@@ -41,3 +41,15 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/java-devops-demo:latest
+
+      - name: Deploy Application
+        run: |
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/java-devops-demo:latest
+
+          docker stop java-devops-demo || true
+          docker rm java-devops-demo || true
+
+          docker run -d \
+            --name java-devops-demo \
+            -p 8080:8080 \
+            ${{ secrets.DOCKERHUB_USERNAME }}/java-devops-demo:latest
