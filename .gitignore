@@ -1,3 +1,5 @@
 target/
 .idea/
 *.iml
+deployment/.env
+deployment/backups/
